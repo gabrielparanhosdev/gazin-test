@@ -18,11 +18,18 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 script {
-                    dir('frontend') {
-                        sh 'ls -al'
-                        sh """
-                        docker build -t $FRONTEND_CONTAINER .
+                    dir('backend') {
+                        sh 'docker build -t $FRONTEND_CONTAINER .'
+                    }
+                }
+            }
+        }
 
+        stage('Build Frontend') {
+            steps {
+                script {
+                    dir('frontend') {
+                        sh """
                         if [ \$(docker ps -a -q -f name=${FRONTEND_CONTAINER}) ]; then
                             docker stop ${FRONTEND_CONTAINER} || true
                             docker rm ${FRONTEND_CONTAINER} || true
@@ -39,10 +46,17 @@ pipeline {
             steps {
                 script {
                     dir('backend') {
-                        sh 'ls -al'
-                        sh """
-                        docker build -t $BACKEND_CONTAINER .
+                        sh 'docker build -t $BACKEND_IMAGE .'
+                    }
+                }
+            }
+        }
 
+        stage('Deploy Backend') {
+            steps {
+                script {
+                    dir('backend') {
+                        sh """
                         if [ \$(docker ps -a -q -f name=${BACKEND_CONTAINER}) ]; then
                             docker stop ${BACKEND_CONTAINER} || true
                             docker rm ${BACKEND_CONTAINER} || true
