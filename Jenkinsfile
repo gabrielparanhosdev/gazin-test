@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'personal_token', url: 'https://github.com/gabrielparanhosdev/cryptoai_website'
+                git branch: 'main', credentialsId: 'personal_token', url: 'https://github.com/gabrielparanhosdev/gazin-test'
             }
         }
 
