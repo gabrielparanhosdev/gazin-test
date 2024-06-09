@@ -17,6 +17,7 @@ pipeline {
             steps {
                 script {
                     dir('frontend') {
+                        sh 'ls -al'
                         sh """
                         docker build -t $FRONTEND_IMAGE .
 
@@ -33,6 +34,7 @@ pipeline {
         }
 
         stage('Build Backend') {
+            sh 'ls -al'
             steps {
                 script {
                     dir('backend') {
