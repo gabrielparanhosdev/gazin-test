@@ -34,10 +34,10 @@ pipeline {
         }
 
         stage('Build Backend') {
-            sh 'ls -al'
             steps {
                 script {
                     dir('backend') {
+                        sh 'ls -al'
                         sh """
                         docker build -t $BACKEND_IMAGE .
 
