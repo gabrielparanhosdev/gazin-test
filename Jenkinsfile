@@ -4,6 +4,8 @@ pipeline {
     environment {
         FRONTEND_IMAGE = 'gazintest/frontend'
         BACKEND_IMAGE = 'gazintest/backend'
+        FRONTEND_CONTAINER = 'frontend_container'
+        BACKEND_CONTAINER = 'backend_container'
     }
 
     stages {
@@ -19,14 +21,14 @@ pipeline {
                     dir('frontend') {
                         sh 'ls -al'
                         sh """
-                        docker build -t $FRONTEND_IMAGE .
+                        docker build -t $FRONTEND_CONTAINER .
 
-                        if [ \$(docker ps -a -q -f name=${FRONTEND_IMAGE}) ]; then
-                            docker stop ${FRONTEND_IMAGE} || true
-                            docker rm ${FRONTEND_IMAGE} || true
+                        if [ \$(docker ps -a -q -f name=${FRONTEND_CONTAINER}) ]; then
+                            docker stop ${FRONTEND_CONTAINER} || true
+                            docker rm ${FRONTEND_CONTAINER} || true
                         fi
 
-                        docker run -d -p 3007:80 --name ${FRONTEND_IMAGE} $FRONTEND_IMAGE
+                        docker run -d -p 3007:80 --name ${FRONTEND_CONTAINER} $FRONTEND_IMAGE
                         """
                     }
                 }
@@ -39,14 +41,14 @@ pipeline {
                     dir('backend') {
                         sh 'ls -al'
                         sh """
-                        docker build -t $BACKEND_IMAGE .
+                        docker build -t $BACKEND_CONTAINER .
 
-                        if [ \$(docker ps -a -q -f name=${BACKEND_IMAGE}) ]; then
-                            docker stop ${BACKEND_IMAGE} || true
-                            docker rm ${BACKEND_IMAGE} || true
+                        if [ \$(docker ps -a -q -f name=${BACKEND_CONTAINER}) ]; then
+                            docker stop ${BACKEND_CONTAINER} || true
+                            docker rm ${BACKEND_CONTAINER} || true
                         fi
 
-                        docker run -d -p 3006:3006 --name ${BACKEND_IMAGE} $BACKEND_IMAGE
+                        docker run -d -p 3006:3006 --name ${BACKEND_CONTAINER} $BACKEND_IMAGE
                         """
                     }
                 }
