@@ -25,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('Build Frontend') {
+        stage('Deploy Frontend') {
             steps {
                 script {
                     dir('frontend') {
