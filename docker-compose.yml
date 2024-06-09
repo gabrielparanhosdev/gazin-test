@@ -4,7 +4,7 @@ services:
     build:
       context: ./frontend
     ports:
-      - "3007:3007"
+      - "3007:3000"
     depends_on:
       - backend
 
@@ -12,4 +12,4 @@ services:
     build:
       context: ./backend
     ports:
-      - "3006:3000"
+      - "3006:3006"

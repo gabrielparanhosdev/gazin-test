@@ -35,7 +35,7 @@ pipeline {
                             docker rm ${FRONTEND_CONTAINER} || true
                         fi
 
-                        docker run -d -p 3007:3007 --name ${FRONTEND_CONTAINER} $FRONTEND_IMAGE
+                        docker run -d -p 3007:3000 --name ${FRONTEND_CONTAINER} $FRONTEND_IMAGE
                         """
                     }
                 }

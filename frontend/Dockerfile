@@ -1,7 +1,7 @@
 FROM node:18.17.0-alpine
 
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
 
 COPY package*.json ./
@@ -16,7 +16,7 @@ COPY . .
 RUN npm run build
 
 
-EXPOSE 3007
+EXPOSE 3000
 
 
 ENV NODE_ENV=production
